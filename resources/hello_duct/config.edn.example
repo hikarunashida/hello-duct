@@ -2,10 +2,15 @@
  {:duct.core/project-ns hello-duct
 
   :duct.router/ataraxy
-  {:routes {[:get "/example"] [:hello-duct.handler/example]}}
+  {:routes {[:get "/example"] [:hello-duct.handler/example]
+            [:get "/hello"] [:hello-duct.handler/hello]}}
 
   :hello-duct.handler/example
-  {}}
+  {}
+
+  :hello-duct.handler/hello
+  {}
+  }
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
