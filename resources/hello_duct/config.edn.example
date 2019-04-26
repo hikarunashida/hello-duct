@@ -1,0 +1,16 @@
+{:duct.profile/base
+ {:duct.core/project-ns hello-duct
+
+  :duct.router/ataraxy
+  {:routes {[:get "/example"] [:hello-duct.handler/example]}}
+
+  :hello-duct.handler/example
+  {}}
+
+ :duct.profile/dev   #duct/include "dev"
+ :duct.profile/local #duct/include "local"
+ :duct.profile/prod  {}
+
+ :duct.module/logging {}
+ :duct.module.web/api {}
+ :duct.module/cljs {:main hello-duct.client}}
