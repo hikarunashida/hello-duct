@@ -16,7 +16,7 @@
 
   :hello-duct.graphql/service
   {:schema #ig/ref :hello-duct.graphql/schema
-   :options {:graphql true
+   :options {:graphiql true
              :app-context {:db #ig/ref :duct.database/sql}
              :env :prod}}
 
