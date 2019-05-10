@@ -10,7 +10,9 @@
                  [duct/module.web "0.7.0"]
                  [duct.module.pedestal "2.0.1"]
                  [com.walmartlabs/lacinia "0.33.0-alpha-3"]
-                 [com.walmartlabs/lacinia-pedestal "0.11.0"]]
+                 [com.walmartlabs/lacinia-pedestal "0.11.0"]
+                 [io.pedestal/pedestal.jetty "0.5.5"]
+                 [io.pedestal/pedestal.service "0.5.5"]]
   :plugins [[duct/lein-duct "0.12.0"]]
   :main ^:skip-aot hello-duct.main
   :resource-paths ["resources" "target/resources"]
