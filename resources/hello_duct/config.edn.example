@@ -12,7 +12,7 @@
   {}
 
   :hello-duct.graphql/schema
-  {}
+  {:schema-path "hello_duct/cgg-schema.edn"}
 
   :hello-duct.graphql/service
   {:schema #ig/ref :hello-duct.graphql/schema

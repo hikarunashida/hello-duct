@@ -13,8 +13,8 @@
    :query_game-by-id (constantly nil)})
 
 (defmethod ig/init-key ::schema
-  [_ _]
-  (-> "hello_duct/cgg-schema.edn"
+  [_ {:keys [schema-path]}]
+  (-> schema-path
       io/resource
       slurp
       edn/read-string
