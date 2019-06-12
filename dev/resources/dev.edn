@@ -1,5 +1,1 @@
-{:duct.server/pedestal
- {:service #:io.pedestal.http {:join? false}}
-
- :hello-duct.graphql/service
- {:options {:env :dev}}}
+{}
