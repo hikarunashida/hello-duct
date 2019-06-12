@@ -11,21 +11,26 @@
   :hello-duct.handler/hello
   {}
 
-  :hello-duct.graphql/schema
-  {:schema-path "hello_duct/cgg-schema.edn"}
+  ;; graphql
 
-  :hello-duct.graphql/service
-  {:schema #ig/ref :hello-duct.graphql/schema
-   :options {:graphiql true
-             :app-context {:db #ig/ref :duct.database/sql}
-             :env :prod}}
+  [:duct/const :path/cgg-data]
+  "hello_duct/cgg-data.edn"
 
-  :duct.server/pedestal
-  {:base-service #ig/ref :hello-duct.graphql/service
-   :service #:io.pedestal.http {:join? true
-                                :host #duct/env "SERVER_HOST"
-                                :port #duct/env ["SERVER_PORT" Int :or 8888]}}
-  }
+  [:duct/const :path/cgg-schema]
+  "hello_duct/cgg-schema.edn"
+
+  :hello-duct.graphql/load-data
+  {:data-path #ig/ref :path/cgg-data}
+
+  :hello-duct.graphql/resolver-map
+  {:cgg-data #ig/ref :hello-duct.graphql/load-data}
+
+  :hello-duct.graphql/load-schema
+  {:schema-path #ig/ref :path/cgg-schema
+   :resolver-map #ig/ref :hello-duct.graphql/resolver-map}
+
+  :hello-duct.graphql/execute
+  {:schema #ig/ref :hello-duct.graphql/load-schema}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
