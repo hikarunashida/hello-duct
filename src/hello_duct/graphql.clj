@@ -1,11 +1,13 @@
 (ns hello-duct.graphql
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
+            [clojure.walk :as walk]
             [com.walmartlabs.lacinia :as lacinia]
             [com.walmartlabs.lacinia.pedestal :as pedestal]
             [com.walmartlabs.lacinia.schema :as schema]
             [com.walmartlabs.lacinia.util :as util]
-            [integrant.core :as ig]))
+            [integrant.core :as ig])
+  (:import (clojure.lang IPersistentMap)))
 
 (defmethod ig/init-key ::load-data
   [_ {:keys [data-path]}]
@@ -58,10 +60,28 @@
 
 ;; execute
 
+(defn- sanitize-node
+  [node]
+  (cond
+    (instance? IPersistentMap node)
+    (into {} node)
+
+    (seq? node)
+    (vec node)
+
+    :else
+    node))
+
+(defn- simplify
+  [m]
+  (walk/postwalk sanitize-node m))
+
 (defmethod ig/init-key ::execute
   [_ {:keys [schema]}]
   (fn [query]
-    (lacinia/execute schema query nil nil)))
+    (-> schema
+        (lacinia/execute query nil nil)
+        simplify)))
 
 ;; service
 

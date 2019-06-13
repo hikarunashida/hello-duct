@@ -10,10 +10,7 @@
             [eftest.runner :as eftest]
             [integrant.core :as ig]
             [integrant.repl :refer [clear halt go init prep reset]]
-            [integrant.repl.state :refer [config system]]
-            [clojure.walk :as walk]
-            [com.walmartlabs.lacinia :as lacinia])
-  (:import (clojure.lang IPersistentMap)))
+            [integrant.repl.state :refer [config system]]))
 
 (duct/load-hierarchy)
 
@@ -32,28 +29,3 @@
   (load "local"))
 
 (integrant.repl/set-prep! #(duct/prep-config (read-config) profiles))
-
-;;graphql
-
-(defn sanitize-node
-  [node]
-  (cond
-    (instance? IPersistentMap node)
-    (into {} node)
-
-    (seq? node)
-    (vec node)
-
-    :else
-    node))
-
-(defn simplify
-  [m]
-  (walk/postwalk sanitize-node m))
-
-(defn q
-  [query-string]
-  (-> system
-      :hello-duct.graphql/schema
-      (lacinia/execute query-string nil nil)
-      simplify))
