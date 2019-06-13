@@ -9,7 +9,6 @@
 
 (defmethod ig/init-key ::load-data
   [_ {:keys [data-path]}]
-  (prn [data-path])
   (-> data-path
       io/resource
       slurp
