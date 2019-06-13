@@ -30,7 +30,15 @@
    :resolver-map #ig/ref :hello-duct.graphql/resolver-map}
 
   :hello-duct.graphql/execute
-  {:schema #ig/ref :hello-duct.graphql/load-schema}}
+  {:schema #ig/ref :hello-duct.graphql/load-schema}
+
+  ;; pedestal
+
+  :hello-duct.pedestal/pedestal
+  {:schema #ig/ref :hello-duct.graphql/load-schema}
+
+  :hello-duct.pedestal/server
+  {:server #ig/ref :hello-duct.pedestal/pedestal}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
