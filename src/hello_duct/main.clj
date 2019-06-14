@@ -5,7 +5,7 @@
 (duct/load-hierarchy)
 
 (defn -main [& args]
-  (let [keys     (or (duct/parse-keys args) [:duct/daemon])
+  (let [keys (or (duct/parse-keys args) [:duct/daemon])
         profiles [:duct.profile/prod]]
     (-> (duct/resource "hello_duct/config.edn")
         (duct/read-config)

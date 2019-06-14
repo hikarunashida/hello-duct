@@ -1,16 +1,44 @@
 {:duct.profile/base
  {:duct.core/project-ns hello-duct
 
-  :duct.router/ataraxy
-  {:routes {[:get "/example"] [:hello-duct.handler/example]
-            [:get "/hello"] [:hello-duct.handler/hello]}}
-
   :hello-duct.handler/example
   {}
 
   :hello-duct.handler/hello
   {}
-  }
+
+  :duct.router/ataraxy
+  {:routes {[:get "/example"] [:hello-duct.handler/example]
+            [:get "/hello"] [:hello-duct.handler/hello]}}
+
+  ;; graphql
+
+  [:duct/const :path/cgg-data]
+  "hello_duct/cgg-data.edn"
+
+  [:duct/const :path/cgg-schema]
+  "hello_duct/cgg-schema.edn"
+
+  :hello-duct.graphql/load-data
+  {:data-path #ig/ref :path/cgg-data}
+
+  :hello-duct.graphql/resolver-map
+  {:cgg-data #ig/ref :hello-duct.graphql/load-data}
+
+  :hello-duct.graphql/load-schema
+  {:schema-path #ig/ref :path/cgg-schema
+   :resolver-map #ig/ref :hello-duct.graphql/resolver-map}
+
+  :hello-duct.graphql/execute
+  {:schema #ig/ref :hello-duct.graphql/load-schema}
+
+  ;; pedestal
+
+  :hello-duct.pedestal/pedestal
+  {:schema #ig/ref :hello-duct.graphql/load-schema}
+
+  :hello-duct.pedestal/server
+  {:server #ig/ref :hello-duct.pedestal/pedestal}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
