@@ -12,4 +12,3 @@ pom.xml.asc
 /profiles.clj
 /dev/resources/local.edn
 /dev/src/local.clj
-/resources/hello_duct/*.edn
