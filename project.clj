@@ -13,7 +13,8 @@
                  [com.walmartlabs/lacinia-pedestal "0.11.0"]
                  [io.pedestal/pedestal.jetty "0.5.5"]
                  [io.pedestal/pedestal.service "0.5.5"]
-                 [metosin/reitit-ring "0.3.7"]]
+                 [metosin/reitit-ring "0.3.7"]
+                 [ring "1.7.1"]]
   :plugins [[duct/lein-duct "0.12.0"]]
   :main ^:skip-aot hello-duct.main
   :resource-paths ["resources" "target/resources"]
