@@ -38,7 +38,18 @@
   {:schema #ig/ref :hello-duct.graphql/load-schema}
 
   :hello-duct.pedestal/server
-  {:server #ig/ref :hello-duct.pedestal/pedestal}}
+  {:server #ig/ref :hello-duct.pedestal/pedestal}
+
+  ;; ring
+
+  :hello-duct.ring/router
+  {:routes [["/example" {:get #ig/ref :hello-duct.handler/example}]
+            ["/hello" {:get #ig/ref :hello-duct.handler/hello}]]
+   :opts nil}
+
+  :hello-duct.ring/ring-handler
+  {:router #ig/ref :hello-duct.ring/router
+   :middleware nil}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
