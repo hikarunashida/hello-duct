@@ -49,7 +49,7 @@
 
   :hello-duct.ring/ring-handler
   {:router #ig/ref :hello-duct.ring/router
-   :middleware nil}
+   :middlewares nil}
 
   :hello-duct.ring/jetty
   {:handler #ig/ref :hello-duct.ring/ring-handler
