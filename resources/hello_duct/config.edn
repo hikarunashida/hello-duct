@@ -52,9 +52,12 @@
             ["/plus" {:get #ig/ref :hello-duct.handler.example/plus}]]
    :opts nil}
 
+  :hello-duct.ring/middlewares
+  {}
+
   :hello-duct.ring/ring-handler
   {:router #ig/ref :hello-duct.ring/router
-   :middlewares nil}
+   :middlewares #ig/ref :hello-duct.ring/middlewares}
 
   :hello-duct.ring/jetty
   {:handler #ig/ref :hello-duct.ring/ring-handler
