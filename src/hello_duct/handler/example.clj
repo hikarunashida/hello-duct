@@ -3,12 +3,19 @@
             [ataraxy.response :as response] 
             [integrant.core :as ig]))
 
-(defmethod ig/init-key :hello-duct.handler/example
-  [_ options]
-  (fn [{[_] :ataraxy/result}]
-    [::response/ok {:example "data"}]))
+(defn- json-response
+  [data]
+  {:status 200 :body data})
 
-(defmethod ig/init-key :hello-duct.handler/hello
-  [_ options]
-  (fn [{[_] :ataraxy/result}]
-    [::response/ok "<h1>Hello World</h1>"]))
+(defmethod ig/init-key ::example
+  [_ _]
+  (fn [_] (json-response {:example "data"})))
+
+(defmethod ig/init-key ::hello
+  [_ _]
+  (fn [_] "<h1>Hello World</h1>"))
+
+(defmethod ig/init-key ::plus
+  [_ _]
+  (fn [{{:keys [x y]} :query-params}]
+    (json-response (+ x y))))

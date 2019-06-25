@@ -7,7 +7,8 @@
   [_ {:keys [routes opts]}]
   (r-ring/router routes opts))
 
-(defn- error-response [status-code msg]
+(defn- error-response
+  [status-code msg]
   {:status status-code
    :headers {"Content-Type" "text/plain"}
    :body msg})

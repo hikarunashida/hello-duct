@@ -1,10 +1,13 @@
 {:duct.profile/base
  {:duct.core/project-ns hello-duct
 
-  :hello-duct.handler/example
+  :hello-duct.handler.example/example
   {}
 
-  :hello-duct.handler/hello
+  :hello-duct.handler.example/hello
+  {}
+
+  :hello-duct.handler.example/plus
   {}
 
   :duct.router/ataraxy
@@ -43,8 +46,10 @@
   ;; ring
 
   :hello-duct.ring/router
-  {:routes [["/example" {:get #ig/ref :hello-duct.handler/example}]
-            ["/hello" {:get #ig/ref :hello-duct.handler/hello}]]
+  {:routes ["/api"
+            ["/example" {:get #ig/ref :hello-duct.handler.example/example}]
+            ["/hello" {:get #ig/ref :hello-duct.handler.example/hello}]
+            ["/plus" {:get #ig/ref :hello-duct.handler.example/plus}]]
    :opts nil}
 
   :hello-duct.ring/ring-handler
