@@ -10,8 +10,8 @@
   :hello-duct.handler.example/plus
   {}
 
-  :duct.router/ataraxy
-  {:routes {[:get "/example"] [:hello-duct.handler/example]
+  ;;:duct.router/ataraxy
+  #_{:routes {[:get "/example"] [:hello-duct.handler/example]
             [:get "/hello"] [:hello-duct.handler/hello]}}
 
   ;; graphql
@@ -40,8 +40,8 @@
   :hello-duct.pedestal/pedestal
   {:schema #ig/ref :hello-duct.graphql/load-schema}
 
-  :hello-duct.pedestal/server
-  {:server #ig/ref :hello-duct.pedestal/pedestal}
+  ;:hello-duct.pedestal/server
+  #_{:server #ig/ref :hello-duct.pedestal/pedestal}
 
   ;; ring
 
